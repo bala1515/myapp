@@ -15,7 +15,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: root
-  socket: /var/run/mysqld/mysqld.sock
+  host: db4free.net
 
 development:
   <<: *default
@@ -53,3 +53,4 @@ production:
   database: myapp_production
   username: myapp
   password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
+  host: db4free.net
