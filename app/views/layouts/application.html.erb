@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Myapp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag 'custom_js/bootstrap.min.js' %>
+    <%= javascript_include_tag 'custom_js/jquery.min.js' %>
+    <%= stylesheet_link_tag 'custom_css/bootstrap.min.css' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

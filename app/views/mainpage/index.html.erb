@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>profile</title>
+</head>
+<body>
+	<div class="container" style = 'width: 50%; height:50%'>
+		<%= form_with(scope: :profile, url: create_path, local: true) do |form| %>
+			<%= hidden_field_tag :type, 1 %>
+		  <%= form.label :name %>
+		  <%= form.text_field :name , class: 'form-control'%>
+
+		  <%= form.label :age %>
+		  <%= form.text_field :age , class: 'form-control'%>
+
+		  <%= form.label :address %>
+		  <%= form.text_field :address, class: 'form-control' %>
+
+		  <%= form.submit 'submit' , class: 'btn btn-primary'%>
+		<% end %>
+	</div>
+</body>
+</html>
