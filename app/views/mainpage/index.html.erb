@@ -24,32 +24,44 @@
 	<div id = "rz_pay" class="btn btn-success">pay</div>
 </body>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-var options = {
-    "key": "rzp_live_gCl0983OhA6nBG", // Enter the Key ID generated from the Dashboard
-    "amount": "10", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "Acme Corp", //your business name
-    "description": "Test Transaction",
-    "image": "https://example.com/your_logo",
-    "order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
-    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-        "name": "Bala", //your customer's name
-        "email": "bharathibala179@gmail.com",
-        "contact": "9361985078" //Provide the customer's phone number for better conversion rates 
-    },
-    "notes": {
-        "address": "Razorpay Corporate Office"
-    },
-    "theme": {
-        "color": "#3399cc"
-    }
-};
-var rzp1 = new Razorpay(options);
-document.getElementById('rz_pay').onclick = function(e){
-    rzp1.open();
+$('#rz_pay').on('click', function(e) {
     e.preventDefault();
-}
+
+    $.ajax({
+        url: '/mainpage/create_order',
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            var options = {
+                "key": "rzp_live_gCl0983OhA6nBG", // Replace with your Razorpay key
+                "amount": data.amount,
+                "currency": "INR",
+                "name": "bala company",
+                "description": "Payment for demo",
+                "image": "https://example.com/logo.png",
+                "order_id": data.order_id,
+                "callback_url": "https://balaslive.shop/payment_callback",
+                "prefill": {
+                    "name": "Bala",
+                    "email": "bharathibala179@gmail.com",
+                    "contact": "9361985078"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+
+            var rzp = new Razorpay(options);
+            rzp.open();
+        },
+        error: function(err) {
+            alert("Order creation failed. Please try again.");
+            console.error(err);
+        }
+    });
+});
 </script>
+
 </html>

@@ -1,4 +1,13 @@
 class MainpageController < ApplicationController
+  require 'razorpay'
+
+  Razorpay.setup('rzp_live_gCl0983OhA6nBG', 'zo2hB7VwAUzw4Eh3BkMp0L5E') # Use real keys from Razorpay Dashboard
+
+  def create_order
+    order = Razorpay::Order.create amount: 1000, currency: 'INR', receipt: 'receipt_123'
+    render json: { order_id: order.id }
+  end
+
 
   def index
   end
